@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,10 +23,10 @@
             </a>
             <nav>
                 <ul>
-                    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
-                    <li><a href="#"><i class="fas fa-chart-bar"></i> Research</a></li>
-                    <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="research.html"><i class="fas fa-chart-bar"></i> Research</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -39,7 +40,79 @@
             <p>Upload a lung X-ray image and get instant analysis using our advanced deep learning model. Pneumoscan helps healthcare professionals detect pneumonia and other pulmonary conditions with high accuracy.</p>
         </section>
 
-        <section class="upload-section">
+        <!-- Patient Details Form -->
+        <section class="patient-details-section" id="patientDetailsSection">
+            <div class="section-header">
+                <h2><i class="fas fa-user-circle"></i> Patient Information</h2>
+                <p>Please enter patient details before proceeding with X-ray analysis</p>
+            </div>
+
+            <form id="patientDetailsForm" class="patient-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="patientName">Full Name*</label>
+                        <input type="text" id="patientName" required placeholder="Enter patient's full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="patientId">Patient ID (if available)</label>
+                        <input type="text" id="patientId" placeholder="Enter patient ID">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="patientDob">Date of Birth*</label>
+                        <input type="date" id="patientDob" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="patientGender">Gender*</label>
+                        <select id="patientGender" required>
+                            <option value="" disabled selected>Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                            <option value="Prefer not to say">Prefer not to say</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="patientEmail">Email</label>
+                        <input type="email" id="patientEmail" placeholder="Enter email address">
+                    </div>
+                    <div class="form-group">
+                        <label for="patientPhone">Phone Number</label>
+                        <input type="tel" id="patientPhone" placeholder="Enter phone number">
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="patientNotes">Clinical Notes (symptoms, medical history)</label>
+                    <textarea id="patientNotes" rows="3" placeholder="Enter any relevant clinical information"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn" id="submitPatientDetails">
+                        <i class="fas fa-check-circle"></i> Submit and Continue to X-ray Upload
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- X-ray Upload Section (Initially Locked) -->
+        <section class="upload-section" id="uploadSection" style="display: none;">
+            <div class="section-header">
+                <h2><i class="fas fa-x-ray"></i> X-ray Upload</h2>
+                <p>Upload a chest X-ray image for AI analysis</p>
+                <div class="patient-info-summary" id="patientSummary">
+                    <!-- Patient summary will be displayed here -->
+                </div>
+                <button class="btn btn-small btn-secondary" onclick="editPatientDetails()">
+                    <i class="fas fa-edit"></i> Edit Patient Details
+                </button>
+            </div>
+
             <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
                 <i class="fas fa-cloud-upload-alt"></i>
                 <div class="drop-zone-text">Drag & Drop X-ray Image</div>
