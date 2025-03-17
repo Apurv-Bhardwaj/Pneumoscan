@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Pneumoscan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .about-header h1 {
+            font-size: 3em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary-color), #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-header p {
+            font-size: 1.2em;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .founder-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .founder-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .founder-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .founder-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: white;
+        }
+
+        .founder-name {
+            font-size: 1.8em;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .founder-title {
+            color: var(--primary-color);
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .founder-bio {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .journey-section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .journey-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .journey-header h2 {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .journey-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .journey-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .journey-icon {
+            font-size: 2em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .journey-item h3 {
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .journey-item p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .vision-section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .vision-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .vision-header h2 {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .vision-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .vision-card {
+            padding: 30px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .vision-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .vision-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .vision-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: var(--primary-hover);
+        }
+
+        @media (max-width: 768px) {
+            .about-header h1 {
+                font-size: 2em;
+            }
+
+            .founder-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="pneumo.html" class="logo">
+                    <i class="fas fa-lungs"></i>
+                    Pneumoscan
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="pneumo.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="about.html" class="active"><i class="fas fa-info-circle"></i> About</a></li>
+                        <li><a href="research.html"><i class="fas fa-chart-bar"></i> Research</a></li>
+                        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="about-container">
+            <div class="about-header">
+                <h1>Our Story</h1>
+                <p>Meet the passionate students behind Pneumoscan, driven by innovation and a vision to transform healthcare through technology</p>
+            </div>
+
+            <div class="founder-section">
+                <div class="founder-card">
+                    <div class="founder-avatar">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h2 class="founder-name">Apurv Bhardwaj</h2>
+                    <div class="founder-title">Co-Founder & Lead Developer</div>
+                    <div class="founder-bio">
+                        <p>As a 20-year-old student at SRM University, Apurv has always been fascinated by the intersection of technology and healthcare. His journey in software development began with simple web applications, but his passion for AI and machine learning led him to explore more complex projects. At SRM, he's been actively involved in various technical clubs and hackathons, where he developed his expertise in deep learning and computer vision.</p>
+                        <p>His vision for Pneumoscan stems from a personal experience with healthcare accessibility challenges in his community. This motivated him to create a solution that could make medical diagnosis more accessible and efficient.</p>
+                    </div>
+                </div>
+
+                <div class="founder-card">
+                    <div class="founder-avatar">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h2 class="founder-name">Divyanshi Kochar</h2>
+                    <div class="founder-title">Co-Founder & AI Specialist</div>
+                    <div class="founder-bio">
+                        <p>At 21, Divyanshi brings a unique perspective to Pneumoscan with her deep understanding of artificial intelligence and its applications in healthcare. Her academic journey at SRM University has been marked by excellence in computer science and a particular interest in medical AI applications.</p>
+                        <p>She has been instrumental in developing the core AI algorithms that power Pneumoscan's analysis capabilities. Her research work focuses on improving the accuracy and efficiency of medical image analysis, making healthcare more accessible to underserved communities.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="journey-section">
+                <div class="journey-header">
+                    <h2>Our Journey at SRM</h2>
+                </div>
+                <div class="journey-content">
+                    <div class="journey-item">
+                        <div class="journey-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Technical Excellence</h3>
+                        <p>Active participation in coding competitions and technical workshops at SRM University</p>
+                    </div>
+                    <div class="journey-item">
+                        <div class="journey-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>AI Research</h3>
+                        <p>Conducted extensive research in machine learning and computer vision applications</p>
+                    </div>
+                    <div class="journey-item">
+                        <div class="journey-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Team Leadership</h3>
+                        <p>Led various technical teams and organized hackathons to promote innovation</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vision-section">
+                <div class="vision-header">
+                    <h2>Our Vision for the Future</h2>
+                </div>
+                <div class="vision-content">
+                    <div class="vision-card">
+                        <h3>Healthcare Accessibility</h3>
+                        <p>Making advanced medical diagnosis available to everyone, regardless of their location or economic status. We believe that quality healthcare should be a right, not a privilege.</p>
+                    </div>
+                    <div class="vision-card">
+                        <h3>Technological Innovation</h3>
+                        <p>Continuously pushing the boundaries of what's possible with AI in healthcare. We're committed to developing cutting-edge solutions that can save lives and improve patient outcomes.</p>
+                    </div>
+                    <div class="vision-card">
+                        <h3>Global Impact</h3>
+                        <p>Expanding our reach to serve communities worldwide, particularly in underserved areas where access to medical expertise is limited.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="pneumo.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">© 2023 Pneumoscan. All rights reserved.</div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Support</a>
+                    <a href="#">Research</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
