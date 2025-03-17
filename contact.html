@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Pneumoscan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .contact-header h1 {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .contact-header p {
+            font-size: 1.2em;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .creators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .creator-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .creator-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .creator-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: white;
+        }
+
+        .creator-name {
+            font-size: 1.5em;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .creator-details {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .creator-details p {
+            margin: 5px 0;
+        }
+
+        .creator-email {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .creator-email:hover {
+            color: var(--primary-hover);
+        }
+
+        .mission-section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .mission-section h2 {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .mission-section p {
+            color: var(--text-secondary);
+            font-size: 1.1em;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: var(--primary-hover);
+        }
+
+        @media (max-width: 768px) {
+            .creators-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-header h1 {
+                font-size: 2em;
+            }
+
+            .mission-section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="pneumo.html" class="logo">
+                    <i class="fas fa-lungs"></i>
+                    Pneumoscan
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="pneumo.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+                        <li><a href="#"><i class="fas fa-chart-bar"></i> Research</a></li>
+                        <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="contact-container">
+            <div class="contact-header">
+                <h1>Meet Our Team</h1>
+                <p>We are passionate students dedicated to revolutionizing healthcare through AI technology</p>
+            </div>
+
+            <div class="creators-grid">
+                <div class="creator-card">
+                    <div class="creator-avatar">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h2 class="creator-name">Apurv Bhardwaj</h2>
+                    <div class="creator-details">
+                        <p><i class="fas fa-university"></i> SRM University</p>
+                        <p><i class="fas fa-birthday-cake"></i> Age: 20</p>
+                    </div>
+                    <a href="mailto:apurvbhardwaj24@gmail.com" class="creator-email">
+                        <i class="fas fa-envelope"></i> apurvbhardwaj24@gmail.com
+                    </a>
+                </div>
+
+                <div class="creator-card">
+                    <div class="creator-avatar">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h2 class="creator-name">Divyanshi Kochar</h2>
+                    <div class="creator-details">
+                        <p><i class="fas fa-university"></i> SRM University</p>
+                        <p><i class="fas fa-birthday-cake"></i> Age: 21</p>
+                    </div>
+                    <a href="mailto:dk1234@gmail.com" class="creator-email">
+                        <i class="fas fa-envelope"></i> dk1234@gmail.com
+                    </a>
+                </div>
+            </div>
+
+            <div class="mission-section">
+                <h2>Our Mission</h2>
+                <p>In a world where healthcare accessibility remains a challenge, we've developed Pneumoscan to bridge the gap between advanced medical technology and those who need it most. Our AI-powered system aims to provide quick, accurate preliminary analysis of chest X-rays, making early detection of pulmonary conditions more accessible to healthcare providers worldwide. We believe that by combining artificial intelligence with medical expertise, we can help save lives and improve healthcare outcomes, especially in underserved communities. This technology represents our commitment to making healthcare more efficient, accessible, and effective for everyone.</p>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="pneumo.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">© 2023 Pneumoscan. All rights reserved.</div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Support</a>
+                    <a href="#">Research</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
