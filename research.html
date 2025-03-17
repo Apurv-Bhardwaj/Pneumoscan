@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research - Pneumoscan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .research-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .research-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            opacity: 0;
+        }
+
+        .research-header h1 {
+            font-size: 3em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary-color), #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .research-header p {
+            font-size: 1.2em;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+            opacity: 0;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1.1em;
+        }
+
+        .chart-section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+        }
+
+        .chart-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .chart-header h2 {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .chart-header p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 30px;
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+            opacity: 0;
+        }
+
+        .research-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .research-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .research-content {
+            padding: 25px;
+        }
+
+        .research-content h3 {
+            color: var(--text-primary);
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .research-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .research-tag {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+
+        .timeline-section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            top: 15px;
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 10px;
+        }
+
+        .timeline-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .timeline-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: var(--primary-hover);
+        }
+
+        @media (max-width: 768px) {
+            .research-header h1 {
+                font-size: 2em;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+                margin-bottom: 30px;
+                left: 0;
+            }
+
+            .timeline-item::after {
+                left: 21px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+        .delay-4 { transition-delay: 0.8s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="pneumo.html" class="logo">
+                    <i class="fas fa-lungs"></i>
+                    Pneumoscan
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="pneumo.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+                        <li><a href="research.html" class="active"><i class="fas fa-chart-bar"></i> Research</a></li>
+                        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="research-container">
+            <div class="research-header fade-in">
+                <h1>Healthcare AI Research & Impact</h1>
+                <p>Exploring the transformative power of artificial intelligence in healthcare through data-driven insights and real-world applications</p>
+            </div>
+
+            <div class="stats-grid fade-in delay-1">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Accuracy Rate in Disease Detection</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-number">60%</div>
+                    <div class="stat-label">Faster Diagnosis Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="stat-number">1M+</div>
+                    <div class="stat-label">Patients Served Worldwide</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Healthcare Partners</div>
+                </div>
+            </div>
+
+            <div class="chart-section fade-in delay-2">
+                <div class="chart-header">
+                    <h2>AI in Healthcare: Market Growth & Impact</h2>
+                    <p>Projected growth of AI applications in healthcare and their impact on patient outcomes</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="marketGrowthChart"></canvas>
+                </div>
+            </div>
+
+            <div class="research-grid fade-in delay-3">
+                <div class="research-card">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="AI in Radiology" class="research-image">
+                    <div class="research-content">
+                        <span class="research-tag">Radiology</span>
+                        <span class="research-tag">AI</span>
+                        <h3>AI-Powered Radiology Analysis</h3>
+                        <p>Deep learning models achieving human-level accuracy in detecting pulmonary conditions from chest X-rays.</p>
+                        <a href="#" class="btn btn-small">Read More</a>
+                    </div>
+                </div>
+
+                <div class="research-card">
+                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Healthcare Innovation" class="research-image">
+                    <div class="research-content">
+                        <span class="research-tag">Innovation</span>
+                        <span class="research-tag">Technology</span>
+                        <h3>Future of Healthcare</h3>
+                        <p>How artificial intelligence is revolutionizing patient care and medical diagnosis worldwide.</p>
+                        <a href="#" class="btn btn-small">Read More</a>
+                    </div>
+                </div>
+
+                <div class="research-card">
+                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Clinical Trials" class="research-image">
+                    <div class="research-content">
+                        <span class="research-tag">Clinical Trials</span>
+                        <span class="research-tag">Research</span>
+                        <h3>Clinical Validation Studies</h3>
+                        <p>Comprehensive studies validating the effectiveness of AI in medical imaging analysis.</p>
+                        <a href="#" class="btn btn-small">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-section fade-in delay-3">
+                <div class="chart-header">
+                    <h2>AI Detection Accuracy by Condition</h2>
+                    <p>Comparative analysis of AI detection accuracy across different pulmonary conditions</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="accuracyChart"></canvas>
+                </div>
+            </div>
+
+            <div class="timeline-section fade-in delay-4">
+                <div class="chart-header">
+                    <h2>Our Research Journey</h2>
+                    <p>Key milestones in our development of AI-powered healthcare solutions</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>2020</h3>
+                            <p>Initial development of Pneumoscan AI model</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>2021</h3>
+                            <p>First clinical trials and validation studies</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>2022</h3>
+                            <p>Partnership with major healthcare providers</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>2023</h3>
+                            <p>Global deployment and continuous improvement</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="pneumo.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">© 2023 Pneumoscan. All rights reserved.</div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Support</a>
+                    <a href="#">Research</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.fade-in').forEach((element) => {
+                observer.observe(element);
+            });
+        });
+
+        // Market Growth Chart
+        const marketGrowthCtx = document.getElementById('marketGrowthChart').getContext('2d');
+        new Chart(marketGrowthCtx, {
+            type: 'line',
+            data: {
+                labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+                datasets: [{
+                    label: 'AI Healthcare Market Size (USD Billions)',
+                    data: [4.5, 6.5, 9.5, 13.5, 18.5, 25.5],
+                    borderColor: '#3498db',
+                    backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Accuracy Chart
+        const accuracyCtx = document.getElementById('accuracyChart').getContext('2d');
+        new Chart(accuracyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Pneumonia', 'Tuberculosis', 'COVID-19', 'Other Conditions'],
+                datasets: [{
+                    label: 'AI Detection Accuracy (%)',
+                    data: [95, 92, 94, 88],
+                    backgroundColor: [
+                        'rgba(52, 152, 219, 0.8)',
+                        'rgba(46, 204, 113, 0.8)',
+                        'rgba(155, 89, 182, 0.8)',
+                        'rgba(241, 196, 15, 0.8)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> 
