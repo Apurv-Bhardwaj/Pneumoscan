@@ -1,28 +1,118 @@
-// File input handling
+// Patient data storage
+let patientData = {
+    name: '',
+    id: '',
+    dob: '',
+    gender: '',
+    email: '',
+    phone: '',
+    notes: ''
+};
+
+// DOM Elements
+const patientDetailsSection = document.getElementById('patientDetailsSection');
+const patientDetailsForm = document.getElementById('patientDetailsForm');
+const uploadSection = document.getElementById('uploadSection');
+const patientSummary = document.getElementById('patientSummary');
 const fileInput = document.getElementById('fileInput');
 const dropZone = document.getElementById('dropZone');
 const previewImage = document.getElementById('previewImage');
 
-// Prevent default drag behaviors
-['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-    dropZone.addEventListener(eventName, preventDefaults, false);
-    document.body.addEventListener(eventName, preventDefaults, false);
+// Initialize the page
+document.addEventListener('DOMContentLoaded', function() {
+    // Set up patient form submission
+    patientDetailsForm.addEventListener('submit', handlePatientFormSubmit);
+
+    // Set up file handling
+    setupFileHandling();
 });
 
-// Highlight drop zone when dragging over it
-['dragenter', 'dragover'].forEach(eventName => {
-    dropZone.addEventListener(eventName, highlight, false);
-});
+// Handle patient form submission
+function handlePatientFormSubmit(e) {
+    e.preventDefault();
 
-['dragleave', 'drop'].forEach(eventName => {
-    dropZone.addEventListener(eventName, unhighlight, false);
-});
+    // Collect patient data
+    patientData = {
+        name: document.getElementById('patientName').value,
+        id: document.getElementById('patientId').value,
+        dob: document.getElementById('patientDob').value,
+        gender: document.getElementById('patientGender').value,
+        email: document.getElementById('patientEmail').value,
+        phone: document.getElementById('patientPhone').value,
+        notes: document.getElementById('patientNotes').value
+    };
 
-// Handle dropped files
-dropZone.addEventListener('drop', handleDrop, false);
+    // Show patient summary
+    displayPatientSummary();
 
-// Handle selected files
-fileInput.addEventListener('change', handleFiles);
+    // Hide patient form and show upload section
+    patientDetailsSection.style.display = 'none';
+    uploadSection.style.display = 'block';
+
+    // Scroll to upload section
+    uploadSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Display patient summary
+function displayPatientSummary() {
+    // Format date of birth
+    const dobDate = patientData.dob ? new Date(patientData.dob) : null;
+    const formattedDob = dobDate ? dobDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    }) : '';
+
+    // Calculate age if DOB is provided
+    let age = '';
+    if (dobDate) {
+        const ageDifMs = Date.now() - dobDate.getTime();
+        const ageDate = new Date(ageDifMs);
+        age = Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
+
+    // Create patient summary HTML
+    patientSummary.innerHTML = `
+        <p class="patient-name">${patientData.name}</p>
+        <p><strong>ID:</strong> ${patientData.id || 'Not provided'}</p>
+        <p><strong>DOB:</strong> ${formattedDob} ${age ? `(${age} years)` : ''}</p>
+        <p><strong>Gender:</strong> ${patientData.gender}</p>
+    `;
+}
+
+// Edit patient details
+function editPatientDetails() {
+    // Hide upload section and show patient form
+    uploadSection.style.display = 'none';
+    patientDetailsSection.style.display = 'block';
+
+    // Scroll to patient form
+    patientDetailsSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Set up file handling
+function setupFileHandling() {
+    // Prevent default drag behaviors
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+    });
+
+    // Highlight drop zone when dragging over it
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, unhighlight, false);
+    });
+
+    // Handle dropped files
+    dropZone.addEventListener('drop', handleDrop, false);
+
+    // Handle selected files
+    fileInput.addEventListener('change', handleFiles);
+}
 
 function preventDefaults(e) {
     e.preventDefault();
@@ -181,10 +271,75 @@ function downloadResult() {
         doc.text(`Date: ${reportDate}`, pageWidth - 15, 55, { align: 'right' });
         doc.text(`Time: ${reportTime}`, pageWidth - 15, 60, { align: 'right' });
 
+        // Add patient information section
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.text('PATIENT INFORMATION', 15, 70);
+
+        // Format date of birth
+        const dobDate = patientData.dob ? new Date(patientData.dob) : null;
+        const formattedDob = dobDate ? dobDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        }) : 'Not provided';
+
+        // Calculate age if DOB is provided
+        let age = '';
+        if (dobDate) {
+            const ageDifMs = Date.now() - dobDate.getTime();
+            const ageDate = new Date(ageDifMs);
+            age = Math.abs(ageDate.getUTCFullYear() - 1970);
+        }
+
+        // Add patient details
+        doc.setDrawColor(220, 220, 220);
+        doc.setFillColor(245, 245, 245);
+        doc.roundedRect(15, 75, pageWidth - 30, 35, 3, 3, 'FD');
+
+        doc.setTextColor(50, 50, 50);
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'bold');
+        doc.text(`${patientData.name}`, 20, 83);
+
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'normal');
+
+        const patientDetails = [
+            { label: 'Patient ID:', value: patientData.id || 'Not provided' },
+            { label: 'Date of Birth:', value: `${formattedDob}${age ? ` (${age} years)` : ''}` },
+            { label: 'Gender:', value: patientData.gender || 'Not provided' },
+            { label: 'Contact:', value: patientData.phone || patientData.email || 'Not provided' }
+        ];
+
+        let yPos = 90;
+        patientDetails.forEach(detail => {
+            doc.setFont('helvetica', 'bold');
+            doc.text(detail.label, 20, yPos);
+            doc.setFont('helvetica', 'normal');
+            doc.text(detail.value, 60, yPos);
+            yPos += 6;
+        });
+
+        // Add clinical notes if provided
+        if (patientData.notes) {
+            yPos += 2;
+            doc.setFont('helvetica', 'bold');
+            doc.text('Clinical Notes:', 15, yPos);
+            doc.setFont('helvetica', 'normal');
+
+            const splitNotes = doc.splitTextToSize(patientData.notes, pageWidth - 40);
+            doc.text(splitNotes, 15, yPos + 6);
+
+            yPos += 8 + (splitNotes.length * 5);
+        } else {
+            yPos += 8;
+        }
+
         // Add a line separator
         doc.setDrawColor(220, 220, 220);
         doc.setLineWidth(0.5);
-        doc.line(15, 65, pageWidth - 15, 65);
+        doc.line(15, yPos, pageWidth - 15, yPos);
 
         // Get the dimensions of the image
         const imgWidth = previewImage.naturalWidth;
@@ -212,7 +367,7 @@ function downloadResult() {
 
         // Calculate the position to center the image
         const x = (pageWidth - pdfWidth) / 2;
-        const y = 75; // Position after the header
+        const y = yPos + 10; // Position after patient info
 
         // Add the image to the PDF
         doc.addImage(
